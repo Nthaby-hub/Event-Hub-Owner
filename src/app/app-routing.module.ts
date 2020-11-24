@@ -10,7 +10,11 @@ const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
+  },  {
+    path: 'create-event',
+    loadChildren: () => import('./create-event/create-event/create-event.module').then( m => m.CreateEventPageModule)
   },
+
 ];
 
 @NgModule({
