@@ -6,9 +6,6 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import firebase from 'firebase/app';
 
-
-
-
 var firebaseConfig = {
   apiKey: "AIzaSyD6GLs5KQBz0r05cvbzcy9uhMNFnML4osA",
   authDomain: "eventhub-6c0c8.firebaseapp.com",
@@ -18,7 +15,8 @@ var firebaseConfig = {
   messagingSenderId: "1035188276794",
   appId: "1:1035188276794:web:53ac93e341dac4750f2f03",
   measurementId: "G-Y8L3039Q9Z"
- };
+};
+
 
 
 @Component({
