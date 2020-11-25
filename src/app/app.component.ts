@@ -4,6 +4,23 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
+import firebase from 'firebase/app';
+
+
+
+
+var firebaseConfig = {
+  apiKey: "AIzaSyD6GLs5KQBz0r05cvbzcy9uhMNFnML4osA",
+  authDomain: "eventhub-6c0c8.firebaseapp.com",
+  databaseURL: "https://eventhub-6c0c8.firebaseio.com",
+  projectId: "eventhub-6c0c8",
+  storageBucket: "eventhub-6c0c8.appspot.com",
+  messagingSenderId: "1035188276794",
+  appId: "1:1035188276794:web:53ac93e341dac4750f2f03",
+  measurementId: "G-Y8L3039Q9Z"
+ };
+
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -16,6 +33,8 @@ export class AppComponent {
     private statusBar: StatusBar
   ) {
     this.initializeApp();
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
   }
 
   initializeApp() {
