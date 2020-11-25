@@ -12,12 +12,8 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'profile',
-    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
-  },
-  {
-    path: 'landing',
-    loadChildren: () => import('./landing/landing.module').then( m => m.LandingPageModule)
+    path: 'tabs',
+    loadChildren: () => import('./tabs/tabs.module').then( m => m.TabsPageModule)
   },
 ];
 
