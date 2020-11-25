@@ -18,6 +18,7 @@ var firebaseConfig = {
 };
 
 
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
