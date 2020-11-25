@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'sign-up',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
   {
@@ -34,7 +34,6 @@ const routes: Routes = [
 
 ];
 
-];
 
 @NgModule({
   imports: [

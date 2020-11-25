@@ -14,8 +14,18 @@ export class CreateEventPage implements OnInit {
 
   ngOnInit() {
     this.ownerForm = this.fb.group({
-      name: ['', Validators.required],
-      address: ['', Validators.required]
+      eventName: ['', Validators.required],
+      venue: ['', Validators.required],
+      address: ['', Validators.required],
+      hosts: ['', Validators.required],
+      eventType: ['', Validators.required],
+      TicketName: ['', Validators.required],
+      ticketQuantity: ['', Validators.required],
+      freetickbox: ['', Validators.required],
+      TickLinks: ['', Validators.required],
+      Mini: ['', Validators.required],
+      max: ['', Validators.required]
+      
     });
   }
   
