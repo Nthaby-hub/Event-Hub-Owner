@@ -188,10 +188,10 @@ export class OnboardingPage implements OnInit {
     this.selectedSlide.getActiveIndex().then((slidesIndex) => {
       if(slidesIndex == 2){
         //console.log("Done Slider");
-        this.router.navigateByUrl('/create-event')
+        this.router.navigateByUrl('/sign-up')
       }else{
         this.selectedSlide.slideNext();
-        this.router.navigateByUrl('/create-event')
+        this.router.navigateByUrl('/sign-up')
       }
     });
   }
