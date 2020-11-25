@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from '../app/material.module';
+import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +23,8 @@ import { MaterialModule } from '../app/material.module';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MaterialModule 
+    MaterialModule,
+    NgxMatFileInputModule
   ],
   providers: [
     StatusBar,

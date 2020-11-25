@@ -1,40 +1,187 @@
 <ion-content>
-<div id='header'>
-  <ion-icon name="arrow-back-outline"></ion-icon>
-<h2 style="  text-align: center;">Create Event</h2>
-</div>
-</ion-content>
+  <div id='header'>
+    <ion-icon name="arrow-back-outline"></ion-icon>
+    <h2 style="  text-align: center;">Create Event</h2>
+  </div>
+
   <mat-vertical-stepper linear="false" #stepper>
- 
+
     <mat-step [stepControl]="ownerForm">
       <form [formGroup]="ownerForm">
-        <ng-template matStepLabel>Personal Data</ng-template>
-        <mat-form-field>
-          <input matInput placeholder="Your Name" formControlName="name" required>
+        <ng-template matStepLabel>Event Details</ng-template>
+        <h5><b>Event Information</b></h5>
+        <mat-form-field appearance="outline">
+          <mat-label>Event Name</mat-label>
+          <input matInput placeholder="Event Name" formControlName="eventName">
         </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Venue Name</mat-label>
+          <input matInput placeholder="Venue Name" formControlName="venue">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Address</mat-label>
+          <input matInput placeholder="Address" formControlName="address">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" formControlName="hosts">
+          <mat-label>Event Type</mat-label>
+          <mat-select formControlName="eventType">
+            <mat-option value="option">Music</mat-option>
+            <mat-option value="option">Theatre</mat-option>
+            <mat-option value="option">Sport</mat-option>
+            <mat-option value="option">Festival</mat-option>
+            <mat-option value="option">Expo/Exbitions</mat-option>
+            <mat-option value="option">Movies</mat-option>
+            <mat-option value="option">Tourism</mat-option>
+            <mat-option value="option">Charity</mat-option>
+            <mat-option value="option">Fashion</mat-option>
+            <mat-option value="option">Kids</mat-option>
+            <mat-option value="option">Comedy</mat-option>
+            <mat-option value="option">Seminar/Workshop</mat-option>
+            <mat-option value="option">Remote Webinar</mat-option>
+            <mat-option value="option">Religous</mat-option>
+            <mat-option value="option">Lifestyle</mat-option>
+            <mat-option value="option">Holiday</mat-option>
+          </mat-select>
+
+
+        </mat-form-field>
+        <hr>
+        <h5><b>Event Time</b></h5>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-label>Start Time</ion-label>
+              <ion-datetime displayFormat="HH:mm"></ion-datetime>
+            </ion-col>
+            <ion-col>
+              <ion-label>End Time</ion-label>
+              <ion-datetime displayFormat="HH:mm"></ion-datetime>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <br>
+        <h5><b>Event Date</b></h5>
+        <mat-form-field appearance="outline">
+          <mat-label>Choose a date</mat-label>
+          <input matInput [matDatepicker]="picker">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker startView="year"></mat-datepicker>
+          <!-- [startAt]="startDate" -->
+
+        </mat-form-field>
+        <hr>
+        <h5><b>Add Event Images</b></h5>
+        <input type="file" />
+        <input type="file" />
+        <br>
+        <!-- <mat-form-field>
+  <ngx-mat-file-input [formControl]="" [multiple]="" [accept]=""
+  [color]="">
+     <mat-icon ngxMatFileInputIcon>folder</mat-icon>
+  </ngx-mat-file-input>
+</mat-form-field> -->
+
+        <hr>
+        <h5><b>Event Hosts or Sponsors</b></h5>
+        <mat-form-field appearance="outline">
+          <mat-label>Hosts or Sponsors</mat-label>
+          <input matInput placeholder="Host/Sponsor Name" formControlName="hosts">
+        </mat-form-field>
+
       </form>
     </mat-step>
-   
-    <mat-step [stepControl]="ownerForm" label="Shipping Info">
+
+    <mat-step [stepControl]="ownerForm" label="Create Tickets">
       <form [formGroup]="ownerForm">
-        <mat-form-field>
-          <input matInput placeholder="Address" formControlName="address" required>
+        <mat-form-field appearance="outline">
+          <input matInput placeholder="Ticket Name" formControlName="TicketName" required>
         </mat-form-field>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
+        <mat-form-field appearance="outline">
+          <input matInput placeholder="Ticket Quantity" formControlName="ticketQuantity" required>
+        </mat-form-field>
+        <div id='ticket'>
+          <h5>Free Ticket</h5>
+          <mat-checkbox class="example-margin" formControlName="freetickbox"></mat-checkbox>
         </div>
+        <mat-form-field appearance="outline">
+          <input matInput placeholder="Add Links" formControlName="TickLinks" required>
+        </mat-form-field>
+
+        <hr>
+        <h5><b>Tickets per person</b></h5>
+        <mat-form-field appearance="outline">
+          <mat-label>Min</mat-label>
+          <mat-select formControlName="Mini" >
+            <mat-option value="option">1</mat-option>
+            <mat-option value="option">2</mat-option>
+            <mat-option value="option">3</mat-option>
+            <mat-option value="option">4</mat-option>
+            <mat-option value="option">5</mat-option>
+
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Max</mat-label>
+          <mat-select formControlName="max">
+
+            <mat-option value="option">5</mat-option>
+            <mat-option value="option">6</mat-option>
+            <mat-option value="option">7</mat-option>
+            <mat-option value="option">8</mat-option>
+            <mat-option value="option">9</mat-option>
+            <mat-option value="option">10</mat-option>
+
+          </mat-select>
+        </mat-form-field>
+
+        <h5><b>Tickets per person</b></h5>
+        <!-- <mat-form-field appearance="fill">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker startView="year"></mat-datepicker>
+          [startAt]="startDate" -->
+
+        <!-- </mat-form-field> -->
+
+        <mat-form-field color="accent" appearance="outline">
+          <mat-label>Inherited calendar color</mat-label>
+          <input matInput [matDatepicker]="picker1">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+        <br>
+        <ion-label>Time</ion-label>
+        <ion-datetime displayFormat="HH:mm"></ion-datetime>
+
+        <h5><b>To</b></h5>
+
+        <!-- <mat-form-field>
+        <input matInput [matDatepicker]="picker1">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field> -->
+        <mat-form-field color="accent" appearance="outline">
+          <mat-label>Custom calendar color</mat-label>
+          <input matInput [matDatepicker]="picker2">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2 color="primary"></mat-datepicker>
+        </mat-form-field>
+        <br>
+        <ion-label>Time</ion-label>
+        <ion-datetime displayFormat="HH:mm"></ion-datetime>
       </form>
-    </mat-step>
-    
-    <mat-step label="Confirm Order">
       By clicking finish you accept our Terms & Conditions.
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button (click)="stepper.reset()">Reset</button>
       </div>
+      <ion-button float-right style="border-radius: 40px;" class="button">
+        <div>Publish Event </div>
+      </ion-button>
     </mat-step>
-   
+    
   </mat-vertical-stepper>
-
-
+</ion-content>
