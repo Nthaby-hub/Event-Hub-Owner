@@ -8,6 +8,7 @@ import { CreateEventPageRoutingModule } from './create-event-routing.module';
 
 import { CreateEventPage } from './create-event.page';
 import { MaterialModule } from './../../../app/material.module';
+import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { MaterialModule } from './../../../app/material.module';
     CreateEventPageRoutingModule,
     MaterialModule,
     ReactiveFormsModule,
+    NgxMatFileInputModule 
   ],
   declarations: [CreateEventPage]
 })
