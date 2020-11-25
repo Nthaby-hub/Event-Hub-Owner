@@ -23,13 +23,31 @@ ion-card{
     margin-top: -50%;
  }
 
- ion-fab-button{
-     color: #ffffff;
+ .trash{
+    --background: #ffffff;
  }
  .fab{
-    margin-top: 2%;
+    margin-top: 52%;
+ }
+ .cloud{
+    margin-top: 47%;
  }
  .del{
-     margin-right: 20%;
-     margin-top: 37%;
+    margin-right: 15%;
+    margin-top: 52%;
+ }
+ .delet{
+    margin-top: 47%;
+    margin-right: 15%;
+ }
+ ion-fab-button{
+     width: 35px;
+     height: 35px;
+ }
+ .plus{
+    position: fixed;
+ }
+
+ .add{
+     --background: #e7366d;
  }
