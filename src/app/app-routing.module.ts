@@ -12,16 +12,13 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'tabs',
-    loadChildren: () => import('./tabs/tabs.module').then( m => m.TabsPageModule)
-  },{
-    path: 'sign-up',
-    loadChildren: () => import('./sign-up/sign-up.module').then( m => m.SignUpPageModule)
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
   },
   {
-    path: 'signin',
-    loadChildren: () => import('./signin/signin.module').then( m => m.SigninPageModule)
-  }
+    path: 'tabs',
+    loadChildren: () => import('./tabs/tabs.module').then( m => m.TabsPageModule)
+  },
   
 ];
 
