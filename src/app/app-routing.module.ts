@@ -8,8 +8,20 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'sign-up',
     pathMatch: 'full'
+  },
+  {
+    path: 'create-event',
+    loadChildren: () => import('./create-event/create-event/create-event.module').then( m => m.CreateEventPageModule)
+  },
+  {
+    path: 'sign-up',
+    loadChildren: () => import('./sign-up/sign-up.module').then( m => m.SignUpPageModule)
+  },
+  {
+    path: 'signin',
+    loadChildren: () => import('./signin/signin.module').then( m => m.SigninPageModule)
   },
   {
     path: 'profile',
@@ -19,7 +31,9 @@ const routes: Routes = [
     path: 'tabs',
     loadChildren: () => import('./tabs/tabs.module').then( m => m.TabsPageModule)
   },
-  
+
+];
+
 ];
 
 @NgModule({

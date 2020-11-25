@@ -10,5 +10,10 @@ ion-button{
     --background:#e7366d;
     padding: 4px;
     margin-top: 20px;
+    height: 48px;
 }
+
+.error-message{
+    color: var(--ion-color-danger);
+  }
 

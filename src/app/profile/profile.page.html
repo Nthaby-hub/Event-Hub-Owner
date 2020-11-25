@@ -6,26 +6,35 @@
   <div class="profile">
     <h2>Complete your profile</h2>
 
-    <form (ngSubmit)="companyProf()">
+
+    <ion-item>
+      <ion-label position="floating">Client Code:</ion-label>
+      <ion-input id="clientCode" type="text" name="clientCode"></ion-input>
+    </ion-item>
+    <form [formGroup]="profileForm" (ngSubmit)="companyProf()">
+      <!-- <ion-item>
+        <ion-label position="floating">Client Code:</ion-label>
+        <ion-input type="text" formControlName="clientCode" name="clientCode"></ion-input>
+      </ion-item> -->
       <ion-item>
         <ion-label position="floating">Company Name:</ion-label>
-        <ion-input type="text" [(ngModel)]="set.name" name="company"></ion-input>
+        <ion-input type="text" formControlName="companyName" name="companyName"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Physical Address:</ion-label>
-        <ion-input type="text" [(ngModel)]="set.address" name="physical"></ion-input>
+        <ion-input type="text" formControlName="address" name="address"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Phone Number:</ion-label>
-        <ion-input type="number" [(ngModel)]="set.phone" name="phone"></ion-input>
+        <ion-input type="number" formControlName="phone" name="phone"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Email Address:</ion-label>
-        <ion-input type="email" [(ngModel)]="set.email" name="email"></ion-input>
+        <ion-input type="email" formControlName="email" name="email"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Website:</ion-label>
-        <ion-input type="text" [(ngModel)]="set.site" name="website"></ion-input>
+        <ion-input type="text" formControlName="website" name="website"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>Social Links:</ion-label>
@@ -33,8 +42,11 @@
         <ion-icon color="primary" name="logo-twitter"></ion-icon>
         <ion-icon style="color: rgb(216, 60, 203);" name="logo-instagram"></ion-icon>
       </ion-item>
-        <ion-button class="button" expand="block" shape="round">Save</ion-button>
-      
+
+      <ion-button class="button" expand="block" shape="round" (click)="companyProf()">
+        Save
+      </ion-button>
+
     </form>
   </div>
 
