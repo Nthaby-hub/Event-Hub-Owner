@@ -74,8 +74,12 @@
           <ion-row>
             <ion-col>
               <ion-label>Start Time</ion-label>
+<<<<<<< HEAD
               <ion-datetime displayFormat="HH:mm" formControlName="startTime"></ion-datetime>
               <!-- <ion-input autocapitalize inputmode="time" displayFormat="HH:mm" formControlName="startTime" type="time"></ion-input> -->
+=======
+              <ion-datetime displayFormat="HH:mm" ></ion-datetime>
+>>>>>>> 00c2b1dc3c1921535a99db8b19f3c4faf5e6e1f3
             </ion-col>
             <div *ngFor="let error of errorMessages.startTime">
               <ng-container *ngIf="startTime.hasError(error.type) && (startTime.dirty || startTime.touched)">
