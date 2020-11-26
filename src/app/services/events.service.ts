@@ -19,7 +19,7 @@ export class EventsService {
 
   Signup_Owner(email,password) 
   {
-    return firebase.auth().createUserWithEmailAndPassword(email, password); 
+    return firebase.auth().createUserWithEmailAndPassword(email, password);  
   }
   reserve() {
     return firebase.firestore().collection('events');

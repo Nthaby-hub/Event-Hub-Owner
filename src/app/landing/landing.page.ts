@@ -33,7 +33,7 @@ export class LandingPage implements OnInit {
       res.forEach(element => {
         this.events.push(element.data());
       });
-    });
+    }); 
   
   }
   goToNext()
