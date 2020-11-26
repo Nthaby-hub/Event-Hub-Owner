@@ -1,3 +1,13 @@
+
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="tabs/dashboard"></ion-back-button>
+      </ion-buttons>
+      <!-- <ion-title>Profile</ion-title> -->
+  </ion-toolbar>
+</ion-header>
+
 <ion-content>
 
 <div id="main-cont">
@@ -11,12 +21,12 @@
 </div>
 
 <ion-card>
-  <ion-item><ion-label color="medium">Company Name: </ion-label></ion-item>
-  <ion-item><ion-label color="medium">Address: </ion-label></ion-item>
-  <ion-item><ion-label color="medium">Phone: </ion-label></ion-item>
-  <ion-item><ion-label color="medium">Email: </ion-label></ion-item>
-  <ion-item><ion-label color="medium">Website: </ion-label></ion-item>
-  <ion-item><ion-label color="medium">Social Links:</ion-label></ion-item>
+  <ion-item><ion-label style="font-size: 14px; font-weight: 600;">Company Name: {{ownerProfile?.companyName}}</ion-label></ion-item>
+  <ion-item><ion-label style="font-size: 14px; font-weight: 600;">Address: {{ownerProfile?.address}}</ion-label></ion-item>
+  <ion-item><ion-label style="font-size: 14px; font-weight: 600;">Phone: {{ownerProfile?.phone}}</ion-label></ion-item>
+  <ion-item><ion-label style="font-size: 14px; font-weight: 600;">Email: {{ownerProfile?.email}}</ion-label></ion-item>
+  <ion-item><ion-label style="font-size: 14px; font-weight: 600;">Website: {{ownerProfile?.website}}</ion-label></ion-item>
+  <ion-item><ion-label style="font-size: 14px; font-weight: 600;">Social Links:</ion-label></ion-item>
   
 </ion-card>
 
