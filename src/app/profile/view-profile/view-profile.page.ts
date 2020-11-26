@@ -33,9 +33,6 @@ export class ViewProfilePage implements OnInit {
   ngOnInit() {
     this.authService.signAuth();
 
-    // this.id = this.activatedRoute.snapshot.paramMap.get('id')
-    // console.log('ID: ', this.id)
-
     let user = firebase.auth().currentUser.uid;
     console.log('profile: ', user)
 
