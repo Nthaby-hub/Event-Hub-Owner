@@ -1,29 +1,47 @@
 <ion-content>
   <div id='header'>
-    <ion-icon name="arrow-back-outline"></ion-icon>
+    &nbsp;&nbsp;<ion-icon name="arrow-back-outline" (click)="goToNext()"></ion-icon>
     <h2 style="  text-align: center;">Create Event</h2>
   </div>
 
   <mat-vertical-stepper linear="false" #stepper>
 
     <mat-step [stepControl]="ownerForm">
-      <form [formGroup]="ownerForm">
+      <form [formGroup]="ownerForm" (ngSubmit)="submit()">
         <ng-template matStepLabel>Event Details</ng-template>
         <h5><b>Event Information</b></h5>
         <mat-form-field appearance="outline">
           <mat-label>Event Name</mat-label>
           <input matInput placeholder="Event Name" formControlName="eventName">
         </mat-form-field>
+        <div *ngFor="let error of errorMessages.eventName">
+          <ng-container *ngIf="eventName.hasError(error.type) && (eventName.dirty || eventName.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+
         <mat-form-field appearance="outline">
           <mat-label>Venue Name</mat-label>
           <input matInput placeholder="Venue Name" formControlName="venue">
         </mat-form-field>
+        <div *ngFor="let error of errorMessages.venue">
+          <ng-container *ngIf="venue.hasError(error.type) && (venue.dirty || venue.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+
+
         <mat-form-field appearance="outline">
           <mat-label>Address</mat-label>
           <input matInput placeholder="Address" formControlName="address">
         </mat-form-field>
+        <div *ngFor="let error of errorMessages.address">
+          <ng-container *ngIf="address.hasError(error.type) && (address.dirty || address.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
 
-        <mat-form-field appearance="outline" >
+        <mat-form-field appearance="outline">
           <mat-label>Event Type</mat-label>
           <mat-select formControlName="eventType">
             <mat-option value="option">Music</mat-option>
@@ -42,38 +60,79 @@
             <mat-option value="option">Religous</mat-option>
             <mat-option value="option">Lifestyle</mat-option>
             <mat-option value="option">Holiday</mat-option>
+            <mat-option value="option">Other</mat-option>
           </mat-select>
-
-
         </mat-form-field>
+        <div *ngFor="let error of errorMessages.eventType">
+          <ng-container *ngIf="eventType.hasError(error.type) && (eventType.dirty || eventType.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
         <hr>
         <h5><b>Event Time</b></h5>
         <ion-grid>
           <ion-row>
             <ion-col>
               <ion-label>Start Time</ion-label>
-              <ion-datetime displayFormat="HH:mm"></ion-datetime>
+              <ion-datetime displayFormat="HH:mm" formControlName="startTime"></ion-datetime>
+              <!-- <ion-input autocapitalize inputmode="time" displayFormat="HH:mm" formControlName="startTime" type="time"></ion-input> -->
             </ion-col>
+            <div *ngFor="let error of errorMessages.startTime">
+              <ng-container *ngIf="startTime.hasError(error.type) && (startTime.dirty || startTime.touched)">
+                <small class="error-message">{{error.message}}</small>
+              </ng-container>
+            </div>
+
             <ion-col>
               <ion-label>End Time</ion-label>
-              <ion-datetime displayFormat="HH:mm"></ion-datetime>
+              <ion-datetime displayFormat="HH:mm" formControlName="endTime"></ion-datetime>
+              <!-- <ion-input autocapitalize inputmode="time" displayFormat="HH:mm" formControlName="endTime" type="time"></ion-input> -->
             </ion-col>
+            <div *ngFor="let error of errorMessages.endTime">
+              <ng-container *ngIf="endTime.hasError(error.type) && (endTime.dirty || endTime.touched)">
+                <small class="error-message">{{error.message}}</small>
+              </ng-container>
+            </div>
+
           </ion-row>
         </ion-grid>
         <br>
         <h5><b>Event Date</b></h5>
         <mat-form-field appearance="outline">
           <mat-label>Choose a date</mat-label>
-          <input matInput [matDatepicker]="picker">
+          <!-- <ion-input autocapitalize inputmode="date" formControlName="eventDate" type="date"></ion-input> -->
+           <input matInput [matDatepicker]="picker" formControlName="eventDate">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker startView="year"></mat-datepicker>
+          <mat-datepicker #picker startView="year"></mat-datepicker> 
           <!-- [startAt]="startDate" -->
 
         </mat-form-field>
+        <div *ngFor="let error of errorMessages.eventDate">
+          <ng-container *ngIf="eventDate.hasError(error.type) && (eventDate.dirty || eventDate.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+
+
+
         <hr>
         <h5><b>Add Event Images</b></h5>
-        <input type="file" />
-        <input type="file" />
+        <ion-input formControlName="eventImage1" id="Input" placeholder="Select Item Image" onfocus="this.value=''" type="file" accept="image/*" (change)="addPic($event)" value="Click here to clear" name="picture" required [(ngModel)]="downloadurl"></ion-input>
+        
+        <div *ngFor="let error of errorMessages.eventImage1">
+          <ng-container *ngIf="eventImage1.hasError(error.type) && (eventImage1.dirty || eventImage1.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+        <!-- <ion-input formControlName="eventImage2" id="Input" placeholder="Select Item Image" onfocus="this.value=''" type="file" accept="image/*" (change)="addPic($event)" value="Click here to clear" name="picture" required [(ngModel)]="downloadurl"></ion-input>
+        
+        <div *ngFor="let error of errorMessages.eventImage1">
+          <ng-container *ngIf="eventImage1.hasError(error.type) && (eventImage1.dirty || eventImage1.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div> -->
+
+
         <br>
         <!-- <mat-form-field>
   <ngx-mat-file-input [formControl]="" [multiple]="" [accept]=""
@@ -88,31 +147,59 @@
           <mat-label>Hosts or Sponsors</mat-label>
           <input matInput placeholder="Host/Sponsor Name" formControlName="hosts">
         </mat-form-field>
-
+        <div *ngFor="let error of errorMessages.hosts">
+          <ng-container *ngIf="hosts.hasError(error.type) && (hosts.dirty || hosts.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
       </form>
     </mat-step>
 
     <mat-step [stepControl]="ownerForm" label="Create Tickets">
-      <form [formGroup]="ownerForm">
+      <form [formGroup]="ownerForm" (ngSubmit)="submit()">
         <mat-form-field appearance="outline">
           <input matInput placeholder="Ticket Name" formControlName="TicketName" required>
         </mat-form-field>
+        <div *ngFor="let error of errorMessages.TicketName">
+          <ng-container *ngIf="TicketName.hasError(error.type) && (TicketName.dirty || TicketName.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+
+
         <mat-form-field appearance="outline">
           <input matInput placeholder="Ticket Quantity" formControlName="ticketQuantity" required>
         </mat-form-field>
+        <div *ngFor="let error of errorMessages.ticketQuantity">
+          <ng-container *ngIf="ticketQuantity.hasError(error.type) && (ticketQuantity.dirty || ticketQuantity.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+
         <div id='ticket'>
           <h5>Free Ticket</h5>
           <mat-checkbox class="example-margin" formControlName="freetickbox"></mat-checkbox>
         </div>
+        <div *ngFor="let error of errorMessages.freetickbox">
+          <ng-container *ngIf="freetickbox.hasError(error.type) && (freetickbox.dirty || freetickbox.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+
         <mat-form-field appearance="outline">
           <input matInput placeholder="Add Links" formControlName="TickLinks" required>
         </mat-form-field>
+        <div *ngFor="let error of errorMessages.TickLinks">
+          <ng-container *ngIf="TickLinks.hasError(error.type) && (TickLinks.dirty || TickLinks.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
 
         <hr>
         <h5><b>Tickets per person</b></h5>
         <mat-form-field appearance="outline">
           <mat-label>Min</mat-label>
-          <mat-select formControlName="Mini" >
+          <mat-select formControlName="Mini">
             <mat-option value="option">1</mat-option>
             <mat-option value="option">2</mat-option>
             <mat-option value="option">3</mat-option>
@@ -121,6 +208,11 @@
 
           </mat-select>
         </mat-form-field>
+        <div *ngFor="let error of errorMessages.Mini">
+          <ng-container *ngIf="Mini.hasError(error.type) && (Mini.dirty || Mini.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
 
         <mat-form-field appearance="outline">
           <mat-label>Max</mat-label>
@@ -135,6 +227,11 @@
 
           </mat-select>
         </mat-form-field>
+        <!-- <div *ngFor="let error of errorMessages.max">
+          <ng-container *ngIf="max.hasError(error.type) && (max.dirty || max.touched)">
+              <small class="error-message">{{error.message}}</small>
+          </ng-container>
+      </div> -->
 
         <h5><b>Tickets per person</b></h5>
         <!-- <mat-form-field appearance="fill">
@@ -148,13 +245,25 @@
 
         <mat-form-field color="accent" appearance="outline">
           <mat-label>Inherited calendar color</mat-label>
-          <input matInput [matDatepicker]="picker1">
+          <!-- <ion-input autocapitalize inputmode="date" formControlName="eventDate" type="date1"></ion-input> -->
+          <input matInput [matDatepicker]="picker1" formControlName="date1">
           <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
           <mat-datepicker #picker1></mat-datepicker>
         </mat-form-field>
+        <div *ngFor="let error of errorMessages.date1">
+          <ng-container *ngIf="date1.hasError(error.type) && (date1.dirty || date1.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
         <br>
         <ion-label>Time</ion-label>
-        <ion-datetime displayFormat="HH:mm"></ion-datetime>
+        <ion-datetime displayFormat="HH:mm" formControlName="time1"></ion-datetime>
+        <!-- <ion-input autocapitalize inputmode="time" displayFormat="HH:mm" formControlName="time1" type="time"></ion-input> -->
+        <div *ngFor="let error of errorMessages.time1">
+          <ng-container *ngIf="time1.hasError(error.type) && (time1.dirty || time1.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
 
         <h5><b>To</b></h5>
 
@@ -165,23 +274,38 @@
       </mat-form-field> -->
         <mat-form-field color="accent" appearance="outline">
           <mat-label>Custom calendar color</mat-label>
-          <input matInput [matDatepicker]="picker2">
+          <!-- <ion-input autocapitalize inputmode="date" formControlName="eventDate" type="date2"></ion-input> -->
+          <input matInput [matDatepicker]="picker2" formControlName="date2">
           <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
           <mat-datepicker #picker2 color="primary"></mat-datepicker>
         </mat-form-field>
+        <div *ngFor="let error of errorMessages.date2">
+          <ng-container *ngIf="date2.hasError(error.type) && (date2.dirty || date2.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
         <br>
         <ion-label>Time</ion-label>
-        <ion-datetime displayFormat="HH:mm"></ion-datetime>
+        <ion-datetime displayFormat="HH:mm" formControlName="time2"></ion-datetime>
+        <!-- <ion-input autocapitalize inputmode="time" displayFormat="HH:mm" formControlName="time2" type="time"></ion-input> -->
+        <div *ngFor="let error of errorMessages.time2">
+          <ng-container *ngIf="time2.hasError(error.type) && (time2.dirty || time2.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+        By clicking finish you accept our Terms & Conditions.
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button (click)="stepper.reset()">Reset</button>
+        </div>
+        <ion-button float-right style="border-radius: 40px;" class="button" (click)="submit()"
+          [disabled]="ownerForm.valid" type="submit">
+          <div>Publish Event </div>
+        </ion-button>
+
       </form>
-      By clicking finish you accept our Terms & Conditions.
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
-      </div>
-      <ion-button float-right style="border-radius: 40px;" class="button">
-        <div>Publish Event </div>
-      </ion-button>
+
+
     </mat-step>
-    
   </mat-vertical-stepper>
 </ion-content>
