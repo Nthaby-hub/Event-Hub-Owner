@@ -65,9 +65,46 @@
   </div>
 
   <ion-fab class="plus" vertical="bottom" horizontal="end">
+<<<<<<< HEAD
+    <ion-fab-button class="add" (click)="goToNext()">
+      <ion-icon name="add-outline"></ion-icon>
+=======
     <ion-fab-button class="add">
       <ion-icon name="add-outline" routerLink='/create-event'></ion-icon>
+>>>>>>> 00c2b1dc3c1921535a99db8b19f3c4faf5e6e1f3
     </ion-fab-button>
   </ion-fab>
+
+
+<!-- newly added -->
+
+<div class="home">
+  <h1 style="color: #ffff;">Newly Added</h1>
+
+  <ion-card  *ngFor= "let p of events">
+    <img src="{{p?.eventImage1}}" style="height: 150px;">
+    <ion-fab class="del" vertical="" horizontal="end">
+      <ion-fab-button class="trash">
+        <ion-icon size="small" color="dark" name="trash-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+    <ion-fab class="fab" vertical="" horizontal="end"> 
+      <ion-fab-button class="trash">
+        <ion-icon size="small" color="dark" name="cloud-upload-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+    <ion-grid>
+      <ion-row>
+        <ion-col style="color: rgb(62, 62, 248); font-size: large;">
+          {{p?.eventDate}}
+        </ion-col>
+        <ion-col style="font-size: larger;">
+          {{p?.eventName}} <br>{{p?.venue}} 
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</div>
 
 </ion-content>
