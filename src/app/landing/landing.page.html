@@ -25,7 +25,7 @@
       <ion-grid>
         <ion-row>
           <ion-col style="color: rgb(62, 62, 248); font-size: large;">
-            Jun <br>30
+            {{p?.eventDate.toDate() | date: 'MM'}} <br>{{p?.eventDate.toDate() | date: 'd'}}
           </ion-col>
           <ion-col style="font-size: larger;">
             <ion-button class="ion-icon-left" fill="clear" size="small" color="danger">

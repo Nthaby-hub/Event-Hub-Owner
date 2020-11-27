@@ -100,9 +100,9 @@ export class CreateEventPage implements OnInit {
   get eventDate() {
     return this.ownerForm.get("eventDate");
   }
-  // get eventImage1() {
-  //   return this.ownerForm.get("eventImage1");
-  // }
+  get eventImage1() {
+    return this.ownerForm.get("eventImage1");
+  }
   // get eventImage2() {
   //   return this.ownerForm.get("eventImage2");
   // }
@@ -146,10 +146,11 @@ export class CreateEventPage implements OnInit {
 
 
   public errorMessages = {
-    restaname: [
+    eventName: [
       { type: 'required', message: 'Event name is required' },
       { type: 'maxlength', message: 'No longer than 100 characters' }
     ],
+    
     venue: [
       { type: 'required', message: 'Venue is required' },
       { type: 'maxlength', message: 'No longer than 100 characters' }
@@ -174,10 +175,10 @@ export class CreateEventPage implements OnInit {
       { type: 'required', message: 'Valid date' },
       { type: 'maxlength', message: 'No longer than 10 characters' }
     ],
-    // eventImage1: [
-    //   { type: 'required', message: 'Poster Image is required' },
-    //   { type: 'maxlength', message: 'No longer than 100 characters' }
-    // ],
+    eventImage1: [
+      { type: 'required', message: 'Poster Image is required' },
+      { type: 'maxlength', message: 'No longer than 100 characters' }
+    ],
     // eventImage2: [
     //   { type: 'required', message: 'Image field required' },
     //   { type: 'maxlength', message: 'No longer than 100 characters' }
@@ -305,7 +306,7 @@ export class CreateEventPage implements OnInit {
                 max:this.ownerForm.value.max
 
               }).then(() => {
-                this.router.navigateByUrl('/landing');
+                this.router.navigateByUrl('/tabs/landing');
                 this.ownerForm.reset();
               }).catch(function (error) {
                 console.log(error)
@@ -319,7 +320,7 @@ export class CreateEventPage implements OnInit {
     }
 
     goToNext(){
-      this.router.navigateByUrl('/landing');
+      this.router.navigateByUrl('/tabs/landing');
     }
 
  

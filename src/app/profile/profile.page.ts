@@ -133,7 +133,7 @@ export class ProfilePage implements OnInit {
     }).then(() => {
       localStorage.setItem("display name: ", clientCode);
       console.log('Client Code : ', clientCode)
-      this.nav.navigateRoot('/landing');
+      this.nav.navigateRoot('/tabs/landing');
     })
 
     return await loading.present();
