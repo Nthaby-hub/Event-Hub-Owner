@@ -103,7 +103,7 @@ export class SigninPage implements OnInit {
         //If user has name
       //Navigate to home page
       if (res.user.displayName) {
-        this.nav.navigateRoot("/landing");
+        this.nav.navigateRoot("/tabs/landing");
       }
       //navigate to profile setup page
       else {
@@ -114,7 +114,7 @@ export class SigninPage implements OnInit {
 
     }).then(() => {
       loading.dismiss().then(() => {
-        this.nav.navigateRoot('/landing')
+        this.nav.navigateRoot('/tabs/landing')
       });
     },
     async error => {
