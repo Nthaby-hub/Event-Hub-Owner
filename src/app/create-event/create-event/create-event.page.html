@@ -311,7 +311,7 @@
           <button mat-button (click)="stepper.reset()">Reset</button>
         </div>
         <ion-button float-right style="border-radius: 40px;" class="button" (click)="submit()"
-          [disabled]="ownerForm.valid" type="submit">
+          [disabled]="!ownerForm.valid" type="submit">
           <div>Publish Event </div>
         </ion-button>
 
