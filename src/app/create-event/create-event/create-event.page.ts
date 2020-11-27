@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
+
 import { AlertController, LoadingController, NavController } from '@ionic/angular';
 
 //-----------------------Banele
@@ -10,6 +12,7 @@ import 'firebase/auth';
 import 'firebase/database';
 import 'firebase/firestore';
 import { EventsService } from 'src/app/services/events.service';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -19,19 +22,31 @@ import { EventsService } from 'src/app/services/events.service';
 })
 export class CreateEventPage implements OnInit {
 
+  public minDate = moment().format();
+  public maxDate = moment().add(5, 'y').format('YYYY');
+  myDate = moment().toDate();
+
   ownerForm: FormGroup;
   ownerId:any;
   downloadurl:null;
 
-  constructor(private fb: FormBuilder,
-    private router: Router,
-     public nav: NavController,
-     private eventService: EventsService,
-  public loadingCtrl: LoadingController, 
-  private alertCtrl: AlertController
+  constructor(
+            private fb: FormBuilder,
+            private router: Router,
+            public nav: NavController,
+            private eventService: EventsService,
+            private authService: AuthService,
+            public loadingCtrl: LoadingController, 
+            private alertCtrl: AlertController
     ) { }
 
   ngOnInit() {
+
+    this.authService.signAuth();
+
+    let user = firebase.auth().currentUser.uid;
+    console.log('profile: ', user)
+
     this.addEvent();
 
     // this.ownerForm = this.fb.group({
@@ -279,6 +294,8 @@ export class CreateEventPage implements OnInit {
                 eventImage1:this.ownerForm.value.eventImage1,
                 // eventImage2:this.ownerForm.value.eventImage2,
                 hosts:this.ownerForm.value.hosts,
+
+                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
 
                 TicketName:this.ownerForm.value.TicketName,
                 ticketQuantity:this.ownerForm.value.ticketQuantity,
