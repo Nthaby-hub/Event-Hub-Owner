@@ -274,7 +274,9 @@ export class CreateEventPage implements OnInit {
 
 
     async submit() {
+
       const alert = await this.alertCtrl.create({
+
         message: `Event added successfulluy, please click Okay to confirm`,
         buttons: [
           {
@@ -283,6 +285,7 @@ export class CreateEventPage implements OnInit {
               console.log(this.ownerForm.value);
               var user = firebase.auth().currentUser
               this.ownerId = user.uid;
+              
               this.eventService.regEvent().add({
                 ownerId: this.ownerId,
                 eventName: this.ownerForm.value.eventName,
@@ -295,9 +298,7 @@ export class CreateEventPage implements OnInit {
                 eventImage1:this.ownerForm.value.eventImage1,
                 // eventImage2:this.ownerForm.value.eventImage2,
                 hosts:this.ownerForm.value.hosts,
-
                 createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-
                 TicketName:this.ownerForm.value.TicketName,
                 ticketQuantity:this.ownerForm.value.ticketQuantity,
                 freetickbox:this.ownerForm.value.freetickbox,

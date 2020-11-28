@@ -32,7 +32,7 @@ const routes: Routes = [
     loadChildren: () => import('./tabs/tabs.module').then( m => m.TabsPageModule)
   },
   {
-    path: 'view-profile',
+    path: 'view-profile/:id',
     loadChildren: () => import('./profile/view-profile/view-profile.module').then( m => m.ViewProfilePageModule)
   },
 

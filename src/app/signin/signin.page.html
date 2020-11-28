@@ -1,73 +1,78 @@
 <ion-content style=" --background:#101045">
 
-  <ion-grid style="margin-top: 100px;">
+  <div class="container">
 
+    <ion-grid style="margin-top: 100px;">
 
-
-    <ion-row>
-      <ion-col
-        style="margin-bottom: 20%;color:white; text-align: center;font-weight: bold;font-family:'Arial Narrow Bold', sans-serif;font-size: 2em;"
-        size="12">
-        Sign In
-      </ion-col>
-    </ion-row>
-
-    <ion-grid>
-
-      <div class="cent">
-
-        <div class="personcircle">
-          <ion-icon name="person-circle-outline"></ion-icon>
-        </div>
-
-        <form [formGroup]="eventLoginForm" (ngSubmit)="signinOwner()">
-
-          <ion-row class="rowStyle">
-            <ion-icon name="person"></ion-icon>
-            <ion-input placeholder="Email" formControlName="email" type="email" name="email"></ion-input>
-          </ion-row>
-          <div *ngFor="let error of errorMessages.email">
-            <ng-container *ngIf="email.hasError(error.type) && (email.dirty || email.touched) || isSubmitted">
-              <small class="error-message">{{error.message}}</small>
-            </ng-container>
+      <ion-row>
+        <ion-col
+          style="margin-bottom: 20%;color:white; text-align: center;font-weight: bold;font-family:'Arial Narrow Bold', sans-serif;font-size: 2em;"
+          size="12">
+          Sign In
+        </ion-col>
+      </ion-row>
+  
+      <ion-grid>
+  
+        <div class="cent">
+  
+          <div class="personcircle">
+            <ion-icon name="person-circle-outline"></ion-icon>
           </div>
   
+          <form [formGroup]="eventLoginForm" (ngSubmit)="signinOwner()">
+  
+            <ion-row class="rowStyle">
+              <ion-icon name="person"></ion-icon>
+              <ion-input placeholder="Email" formControlName="email" type="email" name="email"></ion-input>
+            </ion-row>
+            <div *ngFor="let error of errorMessages.email">
+              <ng-container *ngIf="email.hasError(error.type) && (email.dirty || email.touched) || isSubmitted">
+                <small class="error-message">{{error.message}}</small>
+              </ng-container>
+            </div>
+  
+            <ion-row class="rowStyle">
+              <ion-icon name="lock-closed"></ion-icon>
+              <ion-input placeholder="Password" formControlName="password" type="password" name="password"></ion-input>
+            </ion-row>
+            <div *ngFor="let error of errorMessages.password">
+              <ng-container *ngIf="password.hasError(error.type) && (password.dirty || password.touched) || isSubmitted">
+                <small class="error-message">{{error.message}}</small>
+              </ng-container>
+            </div>
+  
+            <ion-button class="btn-signup" style="text-transform: capitalize;" (click)="signinOwner()">
+              Sign in
+            </ion-button>
+  
+          </form>
   
   
-          <ion-row class="rowStyle">
-            <ion-icon name="lock-closed"></ion-icon>
-            <ion-input placeholder="Password" formControlName="password" type="password" name="password"></ion-input>
-          </ion-row>
-          <div *ngFor="let error of errorMessages.password">
-            <ng-container *ngIf="password.hasError(error.type) && (password.dirty || password.touched) || isSubmitted">
-              <small class="error-message">{{error.message}}</small>
-            </ng-container>
+          <div class="forgot">
+            <div class="left">
+              <ion-button expand=block fill="clear" color="light" [routerLink]="['/sign-up']"
+              routerLinkActive="router-link-active"
+              style="text-transform: capitalize; font-size:8px; margin-top: -20px; align-items: flex-start; margin-left: -5px;">
+              Not registed? Sign up
+            </ion-button>
+            </div>
+  
+            <div class="right" style="margin-right: -20px;">
+              <ion-button expand=block fill="clear" color="light"
+              style="text-transform: capitalize; font-size:8px; margin-top: -20px; align-items: flex-start; margin-right: 20px;">
+              Forgot your password?
+            </ion-button>
+            </div>
           </div>
   
-          <ion-button (click)="signinOwner()">
-            Sign in
-          </ion-button>
-
-        </form>
-
-
-        <div class="forgot">
-          <ion-button expand=block fill="clear" color="light" [routerLink]="['/sign-up']" routerLinkActive="router-link-active" 
-            style="text-transform: capitalize; font-size:8px; margin-top: -20px; align-items: flex-start; margin-left: -5px;">
-            Not registed? Sign up
-          </ion-button>
-
-          <ion-button expand=block fill="clear" color="light"
-            style="text-transform: capitalize; font-size:8px; margin-top: -20px; align-items: flex-start; margin-right: 20px;">
-            Forgot your password?
-          </ion-button>
         </div>
-
-      </div>
-
+  
+      </ion-grid>
+  
     </ion-grid>
+  
 
-  </ion-grid>
-
+  </div>
 
 </ion-content>

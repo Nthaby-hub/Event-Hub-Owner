@@ -22,17 +22,48 @@
 </div>
 
 <ion-card>
-  <ion-item><ion-label style="font-size: 14px; font-weight: 600;">Company Name: {{ownerProfile?.companyName}}</ion-label></ion-item>
-  <ion-item><ion-label style="font-size: 14px; font-weight: 600;">Address: {{ownerProfile?.address}}</ion-label></ion-item>
-  <ion-item><ion-label style="font-size: 14px; font-weight: 600;">Phone: {{ownerProfile?.phone}}</ion-label></ion-item>
-  <ion-item><ion-label style="font-size: 14px; font-weight: 600;">Email: {{ownerProfile?.email}}</ion-label></ion-item>
-  <ion-item><ion-label style="font-size: 14px; font-weight: 600;">Website: {{ownerProfile?.website}}</ion-label></ion-item>
-  <ion-item><ion-label style="font-size: 14px; font-weight: 600;">Social Links:</ion-label></ion-item>
-  
+
+
+  <form [formGroup]="editProfileForm" (ngSubmit)="companyProf()">
+    <ion-label style="font-size: medium; margin-top: 5px; margin-left: 15px;" position="floating">Client Code: {{ companyprofile?.clientCode }}</ion-label>
+    <!-- <ion-item>
+      <ion-label style="font-size: large;" position="floating">Client Code:</ion-label>
+      <ion-input type="text" style="color: black;" formControlName="clientCode" name="clientCode"></ion-input>
+    </ion-item> -->
+    <ion-item>
+      <ion-label style="color: black;" position="floating">Company Name:</ion-label>
+      <ion-input type="text" formControlName="companyName" name="companyName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Physical Address:</ion-label>
+      <ion-input type="text" formControlName="address" name="address"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Phone Number:</ion-label>
+      <ion-input type="number" formControlName="phone" name="phone"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Email Address:</ion-label>
+      <ion-input type="email" formControlName="email" name="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Website:</ion-label>
+      <ion-input type="text" formControlName="website" name="website"></ion-input>
+    </ion-item>
+    <!-- <ion-item>
+      <ion-label>Social Links:</ion-label>
+      <ion-icon style="color: rgb(24, 24, 161);" name="logo-facebook"></ion-icon>
+      <ion-icon color="primary" name="logo-twitter"></ion-icon>
+      <ion-icon style="color: rgb(216, 60, 203);" name="logo-instagram"></ion-icon>
+    </ion-item> -->
+
+    <ion-button class="button" expand="block" shape="round" (click)="companyProf()">
+      Save
+    </ion-button>
+
+  </form>
+
 </ion-card>
-
-
-<!-- <ion-button color="primary" shape="round">Save</ion-button> -->
 
 
 
