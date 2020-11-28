@@ -17,6 +17,7 @@ export class ProfilePage implements OnInit {
   profileForm: FormGroup;
   isSubmitted: boolean = false;
   eventOwnerId: any;
+  // clientCode: any;
   company: string;
 
   set = {}
@@ -26,7 +27,7 @@ export class ProfilePage implements OnInit {
     private fb: FormBuilder,
     private alertCtrl: AlertController,
     private authService: AuthService
-  ) { 
+  ) {
     this.company = localStorage.getItem('companyName')
   }
 
@@ -34,20 +35,20 @@ export class ProfilePage implements OnInit {
     this.saveProfile();
   }
 
-  saveProfile(){
+  saveProfile() {
     this.profileForm = this.fb.group({
-      // clientCode: ['', Validators.required],
+      clientCode: ['', Validators.required],
       companyName: ['', Validators.required],
       address: ['', Validators.required],
-      phone: ['',  [ Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-s./0-9]*$')]],
+      phone: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-s./0-9]*$')]],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.0]+.[a-zA-Z]{2,4}$')]],
       website: ['', Validators.required]
     });
   }
 
-  // get clientCode() {
-  //   return this.profileForm.get("clientCode");
-  // }
+  get clientCode() {
+    return this.profileForm.get("clientCode");
+  }
 
   get companyName() {
     return this.profileForm.get("companyName");
@@ -70,10 +71,10 @@ export class ProfilePage implements OnInit {
   }
 
   public errorMessages = {
-    // clientCode: [
-    //   { type: 'required', message: 'Client code is required' },
-    //   { type: 'maxLength', message: 'Client code cannot be longer than 100 characters' }
-    // ],
+    clientCode: [
+      { type: 'required', message: 'Client code is required' },
+      { type: 'maxLength', message: 'Client code cannot be longer than 100 characters' }
+    ],
     companyName: [
       { type: 'required', message: 'Company name is required' },
       { type: 'maxLength', message: 'Company name cannot be longer than 100 characters' }
@@ -98,16 +99,16 @@ export class ProfilePage implements OnInit {
     ]
   }
 
-  async companyProf(){
+  async companyProf() {
 
     const loading = await this.loadingCtrl.create();
 
     const user = firebase.auth().currentUser;
     this.eventOwnerId = user.uid;
-    
+
     firebase.firestore().collection('companyprofile').doc(this.eventOwnerId).set({
       eventOwnerId: this.eventOwnerId,
-      // clientCode: this.profileForm.value.clientCode,
+      clientCode: this.profileForm.value.clientCode,
       companyName: this.profileForm.value.companyName,
       address: this.profileForm.value.address,
       phone: this.profileForm.value.phone,
@@ -119,22 +120,22 @@ export class ProfilePage implements OnInit {
         this.profileForm.reset();
       })
     },
-    error => {
-      loading.dismiss().then(() => {
-        console.log(error)
-      })
-    } 
+      error => {
+        loading.dismiss().then(() => {
+          console.log(error)
+        })
+      }
     );
 
-    var clientCode = (<HTMLInputElement>document.getElementById("clientCode")).value;
+    // var clientCode = (<HTMLInputElement>document.getElementById("clientCode")).value;
 
-    user.updateProfile({
-      displayName: clientCode
-    }).then(() => {
-      localStorage.setItem("display name: ", clientCode);
-      console.log('Client Code : ', clientCode)
-      this.nav.navigateRoot('/tabs/landing');
-    })
+    // user.updateProfile({
+    //   displayName: clientCode
+    // }).then(() => {
+    //   localStorage.setItem("display name: ", clientCode);
+    //   console.log('Client Code : ', clientCode)
+    //   this.nav.navigateRoot('/tabs/landing');
+    // })
 
     return await loading.present();
   }

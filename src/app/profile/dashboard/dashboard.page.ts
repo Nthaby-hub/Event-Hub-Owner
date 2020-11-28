@@ -17,6 +17,7 @@ export class DashboardPage implements OnInit {
   profile: Array<any> = [];
   profId: any;
   profOwner: any;
+  profileOwner: any;
   allOwners: Array<any> = [];
 
   constructor(
@@ -30,12 +31,9 @@ export class DashboardPage implements OnInit {
     let user = firebase.auth().currentUser.uid;
     console.log('profile: ', user)
 
-    firebase.firestore().collection('eventOwners').doc(user).collection('companyprofile').onSnapshot(res => {
-      res.forEach(element => {
-        this.allOwners.push(element.data());
-        // this.loadedRestaurants = this.restaurants
-        console.log('List of resta: ', this.allOwners)
-      });
+    firebase.firestore().collection('companyprofile').doc(user).get().then(res => {
+      this.profileOwner = res.data();
+      console.log('profile owner: ', this.profileOwner)
     })
 
     // Fetching owner details from firebase
@@ -46,14 +44,14 @@ export class DashboardPage implements OnInit {
 
 
     // Fetching the company profile from firebase
-    firebase.firestore().collectionGroup('companyprofile').where('eventOwnerId', '==', user).get().then(snapshot => {
-      snapshot.forEach(doc => {
-        this.profile.push(Object.assign( doc.data(), {uid:doc.id}) )
-        console.log('Profilee: ', this.profile)
-        this.profId = {uid:doc.id}
-        console.log('prof_ID: ', this.profId)
-      })
-    })
+    // firebase.firestore().collectionGroup('companyprofile').where('eventOwnerId', '==', user).get().then(snapshot => {
+    //   snapshot.forEach(doc => {
+    //     this.profile.push(Object.assign( doc.data(), {uid:doc.id}) )
+    //     console.log('Profilee: ', this.profile)
+    //     this.profId = {uid:doc.id}
+    //     console.log('prof_ID: ', this.profId)
+    //   })
+    // })
   }
 
   logout(){

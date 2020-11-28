@@ -51,11 +51,16 @@ ion-card{
 display:flex;
 margin-top: 70%;
 width: 90%;
-height: 55%;
+height: 60%;
 flex-direction: column;
 border-radius: 10px;
 position:relative;
 color: grey;
+}
+
+ion-item{
+    color: grey;
+    width: 90%;
 }
 
 ion-button{
@@ -69,9 +74,9 @@ ion-button{
     }
 
     ion-item{
-        width: 90%;
+        width: 100%;
         margin-top: 1%;
-        background-color: grey;
+        // background-color: grey;
     }
     ion-label{
         color: rgb(165, 164, 164);
