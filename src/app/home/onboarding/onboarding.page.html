@@ -1,0 +1,38 @@
+<ion-content id='container'>
+
+
+
+  <ion-slides #slides pager="true" id='slide-content' [options]="slideOpts" (ionSlideDidChange)="ionSlideChange(slides)">
+    <ion-slide id='slide1' >
+      <img class="title-image" src="/assets/images/undraw_publish_post_vowb.svg" width="20%" height="20%" />
+      <br>
+      <br>
+      <h1><b>Create Events</b></h1>
+      <p>Easily create an event and publish<br> your event</p>
+    </ion-slide>
+    <ion-slide id='slide2' >
+      <img class="title-image" src="/assets/images/undraw_Operating_system_re_iqsc.svg" width="20%" height="20%" />
+      <br>
+      <br>
+      <h1><b>Manage Your Events</b></h1>
+      <p>Forget about mistakes just do it,<br> to an unrelenting pursuit of your goal</p>
+    </ion-slide>
+    <ion-slide id='slide3' >
+      <img class="title-image" src="/assets/images/undraw_Playful_cat_rchv.svg" width="10%" height="10%" />
+      <br>
+      <h1><b>Have Fun</b></h1>
+      <p>Enjoy exploring the best<br>rated app in the world</p>
+    </ion-slide>
+  </ion-slides>
+
+  
+   
+      <ion-button  item-right style="border-radius: 40px; margin-left: 70%;"  class="tour-button"  (click)="next()">
+        <div class="parent"> {{ buttonName }} </div>
+      </ion-button>
+  
+  
+
+
+
+</ion-content>

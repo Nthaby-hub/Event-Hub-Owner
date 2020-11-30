@@ -1,5 +1,8 @@
 {
   "name": "Event-Hub-Owner",
-  "integrations": {},
+  "integrations": {
+    "cordova": {},
+    "capacitor": {}
+  },
   "type": "angular"
 }

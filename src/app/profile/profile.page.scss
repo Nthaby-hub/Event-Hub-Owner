@@ -1,0 +1,25 @@
+
+ion-toolbar{
+    --background: #101045;
+    color: whitesmoke;
+}
+
+.profile{
+    margin: 20px;
+    margin-top: 50px;
+}
+h2{
+    font-family: Helvetica;
+    font-weight: bold;
+}
+ion-button{
+    --background:#e7366d;
+    padding: 4px;
+    margin-top: 20px;
+    height: 48px;
+}
+
+.error-message{
+    color: var(--ion-color-danger);
+  }
+

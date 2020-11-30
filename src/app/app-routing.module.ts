@@ -10,7 +10,12 @@ const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
-  },  {
+  },
+  {
+    path: 'create-event',
+    loadChildren: () => import('./create-event/create-event/create-event.module').then( m => m.CreateEventPageModule)
+  },
+  {
     path: 'sign-up',
     loadChildren: () => import('./sign-up/sign-up.module').then( m => m.SignUpPageModule)
   },
@@ -21,9 +26,7 @@ const routes: Routes = [
   {
     path: 'forgotpassword',
     loadChildren: () => import('./forgotpassword/forgotpassword.module').then( m => m.ForgotpasswordPageModule)
-  },
-
-];
+  }]
 
 @NgModule({
   imports: [
