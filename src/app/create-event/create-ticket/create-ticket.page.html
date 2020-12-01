@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tabs/landing"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Create Ticket</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="evt">
+
+    <h3 style="font-weight: 800; text-align: center; margin-top: 20px;">Add Ticket</h3>
+
+    <ion-segment [(ngModel)]="selectedTabs">
+      <ion-segment-button value="free">
+        <ion-label>Free</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="paid">
+        <ion-label>Paid</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <div class="free" *ngIf="selectedTabs == 'free'">
+      <form [formGroup]="ticketForm" (ngSubmit)="ticketSubmit()">
+        <h3 style="font-weight: 800; margin-top: 20px;">Event Information</h3>
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput placeholder="Name" formControlName="name">
+        </mat-form-field>
+    
+        <mat-form-field appearance="outline">
+          <mat-label>Quantity</mat-label>
+          <input matInput placeholder="Event Venue" formControlName="quantity">
+        </mat-form-field>
+    
+        <mat-form-field appearance="fill" >
+          <!-- <mat-label>Price</mat-label> -->
+          <input matInput placeholder="Free ticket" formControlName="price">
+        </mat-form-field>
+    
+        <br>
+  
+        <br>
+        <ion-button float-right style="border-radius: 40px;" class="button" (click)="ticketSubmit()"
+            [disabled]="!ticketForm.valid" type="submit">
+            <div>Save</div>
+          </ion-button>
+    
+      </form>
+
+    </div>
+
+    <div class="free" *ngIf="selectedTabs == 'paid'">
+      <h3>Paid</h3>
+
+      <form [formGroup]="ticketForm1" (ngSubmit)="ticketSubmit1()">
+        <h3 style="font-weight: 800;">Event Information</h3>
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput placeholder="Name" formControlName="name1">
+        </mat-form-field>
+    
+        <mat-form-field appearance="outline">
+          <mat-label>Quantity</mat-label>
+          <input matInput placeholder="Event Venue" formControlName="quantity1">
+        </mat-form-field>
+    
+        <mat-form-field appearance="outline" >
+          <mat-label>Price</mat-label>
+          <input matInput placeholder="price" formControlName="price1">
+        </mat-form-field>
+    
+        <br>
+  
+        <br>
+        <ion-button float-right style="border-radius: 40px;" class="button" (click)="ticketSubmit1()"
+            [disabled]="!ticketForm1.valid" type="submit">
+            <div>Save</div>
+          </ion-button>
+    
+      </form>
+
+    </div>
+
+  </div>
+
+</ion-content>

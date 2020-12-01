@@ -35,6 +35,11 @@ const routes: Routes = [
     path: 'view-profile/:id',
     loadChildren: () => import('./profile/view-profile/view-profile.module').then( m => m.ViewProfilePageModule)
   },
+  {
+    path: 'create-ticket/:id',
+    loadChildren: () => import('./create-event/create-ticket/create-ticket.module').then( m => m.CreateTicketPageModule)
+  },
+
 
 ];
 
