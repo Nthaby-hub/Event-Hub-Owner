@@ -13,6 +13,10 @@ const routes: Routes = [
         loadChildren: () => import('../landing/landing.module').then(m => m.LandingPageModule)
       },
       {
+        path: 'view-event/:id',
+        loadChildren: () => import('../landing/view-event/view-event.module').then(m => m.ViewEventPageModule)
+      },
+      {
         path: 'home',
         loadChildren: () => import('../home/home.module').then(m => m.HomePageModule)
       },

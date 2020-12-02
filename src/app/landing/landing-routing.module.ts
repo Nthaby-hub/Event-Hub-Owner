@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: LandingPage
+  },  {
+    path: 'view-event',
+    loadChildren: () => import('./view-event/view-event.module').then( m => m.ViewEventPageModule)
   }
+
 ];
 
 @NgModule({

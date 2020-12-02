@@ -39,6 +39,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {OverlayModule} from '@angular/cdk/overlay';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {NgxMatTimepickerModule} from 'ngx-mat-timepicker';
 
 // import {MatFormFieldControl} from '@angular/material/form-field';
 
@@ -82,7 +83,8 @@ const MaterialComponets = [
     OverlayModule,
     PortalModule,
     ScrollingModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    NgxMatTimepickerModule
     // MatFormFieldControl
 ]
 @NgModule({

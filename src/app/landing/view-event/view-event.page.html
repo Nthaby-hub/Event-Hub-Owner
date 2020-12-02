@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tabs/landing"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ events?.eventName }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <div id="main-cont">
+    <div id="top-cont">
+      <ion-icon name="arrow-back-outline" color="contrast"></ion-icon>
+      <img style="width: 100%; height: 100%;" src="{{events?.imgUrl}}">
+    </div>
+
+    <div id="bottom-cont">
+      <h4><b>Event Name: {{ events?.eventName }}</b></h4>
+      <p>Event Address: {{ events?.eventAddress }}</p><br>
+      <p>Event Date: {{ events?.date }}</p>
+      <p>Event Time: {{ events?.startTime }}</p>
+      <p>Event Time: {{ events?.endTime }}</p>
+      <hr style="border: 5px solid black;">
+      <h4 style="text-align: center;"><b>Description:</b></h4>
+      <br>
+      <h4 style="text-align: center;"><b>Hosts and Sponsors: </b></h4>
+    </div>
+
+  </div>
+
+</ion-content>
