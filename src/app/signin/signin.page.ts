@@ -7,7 +7,7 @@ import { AuthService } from '../services/auth.service';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-signin',
@@ -39,7 +39,8 @@ export class SigninPage implements OnInit {
     private authService: AuthService,
     private alertCtrl: AlertController,
     public toastCtrl: ToastController,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -137,6 +138,12 @@ export class SigninPage implements OnInit {
     );
     return await loading.present();
   }
+  goToNextPage() {
+    this.router.navigateByUrl('/forgotpassword');
+     }
+     
+
+
 }
 
 
