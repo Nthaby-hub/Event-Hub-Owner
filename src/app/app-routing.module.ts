@@ -39,9 +39,13 @@ const routes: Routes = [
     path: 'create-ticket/:id',
     loadChildren: () => import('./create-event/create-ticket/create-ticket.module').then( m => m.CreateTicketPageModule)
   },
-
+  {
+    path: 'forgotpassword',
+    loadChildren: () => import('./forgotpassword/forgotpassword.module').then( m => m.ForgotpasswordPageModule)
+  }
 
 ];
+
 
 
 @NgModule({
