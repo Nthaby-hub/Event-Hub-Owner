@@ -107,4 +107,8 @@ export class ViewProfilePage implements OnInit {
 
   }
 
+  addPic(){
+    console.log('Pic pic')
+  }
+
 }
