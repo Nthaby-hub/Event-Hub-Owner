@@ -51,15 +51,14 @@
   
           <div class="forgot">
             <div class="left">
-              <ion-button expand=block fill="clear" color="light" [routerLink]="['/sign-up']"
-              routerLinkActive="router-link-active"
+              <ion-button expand=block fill="clear" color="light" [routerLink]="['/sign-up']" routerLinkActive="router-link-active"
               style="text-transform: capitalize; font-size:8px; margin-top: -20px; align-items: flex-start; margin-left: -5px;">
               Not registed? Sign up
             </ion-button>
             </div>
   
             <div class="right" style="margin-right: -20px;">
-              <ion-button expand=block fill="clear" color="light" (click)="goToNextPage()"
+              <ion-button expand=block fill="clear" color="light" [routerLink]="['/forgotpassword']" routerLinkActive="router-link-active"
               style="text-transform: capitalize; font-size:8px; margin-top: -20px; align-items: flex-start; margin-right: 20px;">
               Forgot your password?
             </ion-button>
