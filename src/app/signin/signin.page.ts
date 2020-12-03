@@ -30,6 +30,7 @@ export class SigninPage implements OnInit {
   profID: any;
   comProf: Array<any> = [];
   eventId: any;
+  companyProf: any;
 
   constructor(
     public nav: NavController,
@@ -79,20 +80,18 @@ export class SigninPage implements OnInit {
 
     console.log(this.eventLoginForm.value)
     this.isSubmitted = true;
+    // Logging in the current owner/user  
     this.authService.signinEventOwner(this.eventLoginForm.value.email, this.eventLoginForm.value.password).then((res) => {
       console.log('logged in: ', res)
 
       // Getting logged in owner
       let user = firebase.auth().currentUser.uid
       console.log('user: ', user)
+      // Fetching the event owners to get their username when logged in
       firebase.firestore().collection('eventOwners').doc(user).get().then(async (snap) => {
         this.owners = snap.data();
         this.username = snap.get('username');
-        console.log('username: ', this.username)
-        console.log('new data: ', this.owners)
         this.role = snap.get('role')
-        console.log('USERNAME: ', this.username)
-        console.log('ROLE: ', this.role)
 
         const toast = await this.toastCtrl.create({
           message: "Welcome " + this.username,
@@ -100,34 +99,41 @@ export class SigninPage implements OnInit {
         });
         toast.present();
 
-        //If user has name
-      //Navigate to home page
-      if (res.user.displayName) {
-        this.nav.navigateRoot("/tabs/landing");
-      }
-      //navigate to profile setup page
-      else {
-        this.nav.navigateRoot("/profile");
-      }
+        // Fetching company profile to get the client code
+        firebase.firestore().collection('companyprofile').doc(user).get().then((snapshot) => {
+          this.companyProf = snapshot.data();
+          console.log('only profile: ', this.companyProf)
+          this.clientCode = snapshot.get('clientCode')
+          console.log('hahah client Codee: ', this.clientCode)
+
+          // Checking if the client code is available before logging in
+          if (this.clientCode) {
+            console.log(' IF Client Code: ', this.clientCode)
+            this.nav.navigateRoot("/tabs/landing");
+          } else {
+            console.log('Else User Client Code: ', this.clientCode)
+            this.nav.navigateRoot("/profile");
+          }
+
+        })
 
       })
 
     }).then(() => {
       loading.dismiss().then(() => {
         this.nav.navigateRoot('/tabs/landing')
-
       });
     },
-    async error => {
-      const toast = await this.toastCtrl.create({
-        message: error.message,
-        duration: 3000
-      });
-      toast.present();
-      loading.dismiss().then(() => {
-        console.log(error)
-      });
-    }
+      async error => {
+        const toast = await this.toastCtrl.create({
+          message: error.message,
+          duration: 3000
+        });
+        toast.present();
+        loading.dismiss().then(() => {
+          console.log(error)
+        });
+      }
     );
     return await loading.present();
   }

@@ -9,13 +9,75 @@
 
 <ion-content>
 
-  <!-- <div id='header'>
-    <ion-icon name="arrow-back-outline"></ion-icon>
+  <!-- <h3>Event Details</h3> -->
 
-    <h2 style="  text-align: center;">Create Event</h2>
-  </div> -->
+  <div class="evt">
 
-  <mat-vertical-stepper linear="false" #stepper>
+    <form [formGroup]="eventForm" >
+      <h3 style="font-weight: 800;">Event Information</h3>
+      <mat-form-field appearance="outline">
+        <mat-label>Event Name</mat-label>
+        <input matInput placeholder="Event Name" formControlName="eventName">
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Event Venue</mat-label>
+        <input matInput placeholder="Event Venue" formControlName="eventVenue">
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Event Address</mat-label>
+        <input matInput placeholder="Event Address" formControlName="eventAddress">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Select Category</mat-label>
+        <mat-select formControlName="eventType">
+          <mat-option *ngFor="let category of categories" [value]="category.categoryId">
+            {{category.categoryName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Event Date</mat-label>
+        <input matInput formControlName="date" [min]="minDate" [max]="maxDate" [matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+  
+      <br>
+      <!-- <mat-form-field appearance="outline"> -->
+        <mat-label>Start Time</mat-label>
+      <ion-datetime formControlName="startTime" style="margin-bottom: 10px;" placeholder="Select time " [hourValues]="hourValues" [min]="minTime" [max]="maxTime" displayFormat="hh:mm A" pickerFormat="HH:mm A" (ionFocus)="changeDate($event)"></ion-datetime>
+      <!-- </mat-form-field> -->
+
+      <!-- <mat-form-field appearance="outline"> -->
+        <mat-label>End Time</mat-label>
+      <ion-datetime formControlName="endTime" style="margin-bottom: 10px;" placeholder="Select time " [hourValues]="hourValues" [min]="minTime" [max]="maxTime" displayFormat="hh:mm A" pickerFormat="HH:mm A" (ionFocus)="changeDate($event)"></ion-datetime>
+      <!-- </mat-form-field> -->
+  
+      <!-- <mat-form-field appearance="outline"> -->
+        <mat-label>Event Image</mat-label>
+          <ion-input type="file" formControlName="imgUrl" accept="image/*" (change)="onFileSelected($event)"></ion-input>
+      <!-- </mat-form-field> -->
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description"></textarea>
+      </mat-form-field>
+
+      <br>
+      <ion-button float-right style="border-radius: 40px;" class="button" (click)="eventSubmit()"
+          [disabled]="!eventForm.valid" type="submit">
+          <div>Next</div>
+        </ion-button>
+  
+    </form>
+  
+  </div>
+  
+  <!-- <mat-vertical-stepper linear="false" #stepper>
 
     <mat-step [stepControl]="ownerForm">
       <form [formGroup]="ownerForm" (ngSubmit)="submit()">
@@ -87,7 +149,6 @@
               <ion-label>Start Time</ion-label>
 
               <ion-datetime displayFormat="HH:mm" formControlName="startTime"></ion-datetime>
-              <!-- <ion-input autocapitalize inputmode="time" displayFormat="HH:mm" formControlName="startTime" type="time"></ion-input> -->
             </ion-col>
             <div *ngFor="let error of errorMessages.startTime">
               <ng-container *ngIf="startTime.hasError(error.type) && (startTime.dirty || startTime.touched)">
@@ -98,7 +159,6 @@
             <ion-col>
               <ion-label>End Time</ion-label>
               <ion-datetime displayFormat="HH:mm" formControlName="endTime"></ion-datetime>
-              <!-- <ion-input autocapitalize inputmode="time" displayFormat="HH:mm" formControlName="endTime" type="time"></ion-input> -->
             </ion-col>
             <div *ngFor="let error of errorMessages.endTime">
               <ng-container *ngIf="endTime.hasError(error.type) && (endTime.dirty || endTime.touched)">
@@ -112,11 +172,11 @@
         <h5><b>Event Date</b></h5>
         <mat-form-field appearance="outline">
           <mat-label>Choose a date</mat-label>
-          <!-- <ion-input autocapitalize inputmode="date" formControlName="eventDate" type="date"></ion-input> -->
+       
            <input matInput [matDatepicker]="picker" formControlName="eventDate">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker startView="year"></mat-datepicker> 
-          <!-- [startAt]="startDate" -->
+         
 
         </mat-form-field>
         <div *ngFor="let error of errorMessages.eventDate">
@@ -136,22 +196,8 @@
             <small class="error-message">{{error.message}}</small>
           </ng-container>
         </div>
-        <!-- <ion-input formControlName="eventImage2" id="Input" placeholder="Select Item Image" onfocus="this.value=''" type="file" accept="image/*" (change)="addPic($event)" value="Click here to clear" name="picture" required [(ngModel)]="downloadurl"></ion-input>
-        
-        <div *ngFor="let error of errorMessages.eventImage1">
-          <ng-container *ngIf="eventImage1.hasError(error.type) && (eventImage1.dirty || eventImage1.touched)">
-            <small class="error-message">{{error.message}}</small>
-          </ng-container>
-        </div> -->
-
 
         <br>
-        <!-- <mat-form-field>
-  <ngx-mat-file-input [formControl]="" [multiple]="" [accept]=""
-  [color]="">
-     <mat-icon ngxMatFileInputIcon>folder</mat-icon>
-  </ngx-mat-file-input>
-</mat-form-field> -->
 
         <hr>
         <h5><b>Event Hosts or Sponsors</b></h5>
@@ -239,25 +285,11 @@
 
           </mat-select>
         </mat-form-field>
-        <!-- <div *ngFor="let error of errorMessages.max">
-          <ng-container *ngIf="max.hasError(error.type) && (max.dirty || max.touched)">
-              <small class="error-message">{{error.message}}</small>
-          </ng-container>
-      </div> -->
 
         <h5><b>Tickets per person</b></h5>
-        <!-- <mat-form-field appearance="fill">
-        <mat-label>Choose a date</mat-label>
-        <input matInput [matDatepicker]="picker">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker startView="year"></mat-datepicker>
-          [startAt]="startDate" -->
-
-        <!-- </mat-form-field> -->
 
         <mat-form-field color="accent" appearance="outline">
           <mat-label>Inherited calendar color</mat-label>
-          <!-- <ion-input autocapitalize inputmode="date" formControlName="eventDate" type="date1"></ion-input> -->
           <input matInput [matDatepicker]="picker1" formControlName="date1">
           <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
           <mat-datepicker #picker1></mat-datepicker>
@@ -270,7 +302,6 @@
         <br>
         <ion-label>Time</ion-label>
         <ion-datetime displayFormat="HH:mm" formControlName="time1"></ion-datetime>
-        <!-- <ion-input autocapitalize inputmode="time" displayFormat="HH:mm" formControlName="time1" type="time"></ion-input> -->
         <div *ngFor="let error of errorMessages.time1">
           <ng-container *ngIf="time1.hasError(error.type) && (time1.dirty || time1.touched)">
             <small class="error-message">{{error.message}}</small>
@@ -279,14 +310,8 @@
 
         <h5><b>To</b></h5>
 
-        <!-- <mat-form-field>
-        <input matInput [matDatepicker]="picker1">
-        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-        <mat-datepicker #picker1></mat-datepicker>
-      </mat-form-field> -->
         <mat-form-field color="accent" appearance="outline">
           <mat-label>Custom calendar color</mat-label>
-          <!-- <ion-input autocapitalize inputmode="date" formControlName="eventDate" type="date2"></ion-input> -->
           <input matInput [matDatepicker]="picker2" formControlName="date2">
           <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
           <mat-datepicker #picker2 color="primary"></mat-datepicker>
@@ -299,7 +324,6 @@
         <br>
         <ion-label>Time</ion-label>
         <ion-datetime displayFormat="HH:mm" formControlName="time2"></ion-datetime>
-        <!-- <ion-input autocapitalize inputmode="time" displayFormat="HH:mm" formControlName="time2" type="time"></ion-input> -->
         <div *ngFor="let error of errorMessages.time2">
           <ng-container *ngIf="time2.hasError(error.type) && (time2.dirty || time2.touched)">
             <small class="error-message">{{error.message}}</small>
@@ -311,7 +335,7 @@
           <button mat-button (click)="stepper.reset()">Reset</button>
         </div>
         <ion-button float-right style="border-radius: 40px;" class="button" (click)="submit()"
-          [disabled]="ownerForm.valid" type="submit">
+          [disabled]="!ownerForm.valid" type="submit">
           <div>Publish Event </div>
         </ion-button>
 
@@ -319,5 +343,5 @@
 
 
     </mat-step>
-  </mat-vertical-stepper>
+  </mat-vertical-stepper> -->
 </ion-content>

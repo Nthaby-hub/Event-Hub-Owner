@@ -13,15 +13,15 @@
     <h2>Complete your profile</h2>
 
 
-    <ion-item>
+    <!-- <ion-item>
       <ion-label position="floating">Client Code:</ion-label>
       <ion-input id="clientCode" type="text" name="clientCode"></ion-input>
-    </ion-item>
+    </ion-item> -->
     <form [formGroup]="profileForm" (ngSubmit)="companyProf()">
-      <!-- <ion-item>
+      <ion-item>
         <ion-label position="floating">Client Code:</ion-label>
         <ion-input type="text" formControlName="clientCode" name="clientCode"></ion-input>
-      </ion-item> -->
+      </ion-item>
       <ion-item>
         <ion-label position="floating">Company Name:</ion-label>
         <ion-input type="text" formControlName="companyName" name="companyName"></ion-input>

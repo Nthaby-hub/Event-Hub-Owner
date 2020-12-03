@@ -28,19 +28,24 @@ const routes: Routes = [
     loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
   },
   {
-    path: 'landing',
-    loadChildren: () => import('./landing/landing.module').then( m => m.LandingPageModule)
-  },
-  {
     path: 'tabs',
     loadChildren: () => import('./tabs/tabs.module').then( m => m.TabsPageModule)
   },
   {
-    path: 'view-profile',
+    path: 'view-profile/:id',
     loadChildren: () => import('./profile/view-profile/view-profile.module').then( m => m.ViewProfilePageModule)
   },
+  {
+    path: 'create-ticket/:id',
+    loadChildren: () => import('./create-event/create-ticket/create-ticket.module').then( m => m.CreateTicketPageModule)
+  },
+  {
+    path: 'forgotpassword',
+    loadChildren: () => import('./forgotpassword/forgotpassword.module').then( m => m.ForgotpasswordPageModule)
+  }
 
 ];
+
 
 
 @NgModule({

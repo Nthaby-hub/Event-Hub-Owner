@@ -15,6 +15,7 @@ import { EventsService } from 'src/app/services/events.service';
 import { AuthService } from '../../services/auth.service';
 
 
+
 @Component({
   selector: 'app-create-event',
   templateUrl: './create-event.page.html',
@@ -22,13 +23,32 @@ import { AuthService } from '../../services/auth.service';
 })
 export class CreateEventPage implements OnInit {
 
-  public minDate = moment().format();
-  public maxDate = moment().add(5, 'y').format('YYYY');
-  myDate = moment().toDate();
+  // public minDate = moment().format();
+  // public maxDate = moment().add(5, 'y').format('YYYY');
+  // myDate = moment().toDate();
 
-  ownerForm: FormGroup;
-  ownerId:any;
-  downloadurl:null;
+  minDate: Date;
+  maxDate: Date;
+
+  minTime = '06:30';
+  maxTime = '19:30';
+  hourValues = ['06','07','08','09','10','11','12','13','14','15','16','17','18','19'];
+
+  eventForm: FormGroup
+  categories: Array<any> = [];
+  catId: any;
+  eventOwnerId: any;
+  eventId: any;
+
+  selectedFile: File = null;
+  upLoadedFile: any;
+
+  // ownerForm: FormGroup;
+  // ownerId:any;
+  // eventId:any;
+  // downloadurl:null;
+
+  events: Array<any> = [];
 
   constructor(
             private fb: FormBuilder,
@@ -38,7 +58,11 @@ export class CreateEventPage implements OnInit {
             private authService: AuthService,
             public loadingCtrl: LoadingController, 
             private alertCtrl: AlertController
-    ) { }
+            ) {
+              const currentYear = new Date().getFullYear();
+              this.minDate = new Date();
+              this.maxDate = new Date(currentYear + 20, 11, 31);
+             }
 
   ngOnInit() {
 
@@ -47,281 +71,96 @@ export class CreateEventPage implements OnInit {
     let user = firebase.auth().currentUser.uid;
     console.log('profile: ', user)
 
+    firebase.firestore().collection('categories').onSnapshot(res => {
+      res.forEach(element => {
+        this.categories.push(Object.assign(element.data(), {uid:element.id}) );
+        this.catId = {uid:element.id};
+        console.log('CATIDD: ', this.catId)
+        console.log('Categories: ', this.categories)
+      });
+    });
+
     this.addEvent();
-
-    // this.ownerForm = this.fb.group({
-    //   eventName: ['', Validators.required],
-    //   venue: ['', Validators.required],
-    //   address: ['', Validators.required],
-    //   eventType: ['', Validators.required],
-    //   startTime: ['', Validators.required],
-    //   endTime	: ['', Validators.required],
-    //   eventDate	: ['', Validators.required],
-    //   eventImage1	: ['', Validators.required],
-    //   eventImage2	: ['', Validators.required],
-    //   hosts: ['', Validators.required],
-    //   TicketName: ['', Validators.required],
-    //   ticketQuantity: ['', Validators.required],
-    //   freetickbox: ['', Validators.required],
-    //   TickLinks: ['', Validators.required],
-    //   Mini: ['', Validators.required],
-    //   max: ['', Validators.required],
-    //   date1: ['', Validators.required],
-    //   time1: ['', Validators.required],
-    //   date2: ['', Validators.required],
-    //   time2: ['', Validators.required]
-      
-      
-    // });
-  }
-  
-
-  //--------------------Banele
-
-  get eventName() {
-    return this.ownerForm.get("eventName");
-  }
-  get venue() {
-    return this.ownerForm.get("venue");
-  }
-  get address() {
-    return this.ownerForm.get("address");
-  }
-  get eventType() {
-    return this.ownerForm.get("eventType");
   }
 
-  get startTime() {
-    return this.ownerForm.get("startTime");
-  }
-  get endTime() {
-    return this.ownerForm.get("endTime");
-  }
-  get eventDate() {
-    return this.ownerForm.get("eventDate");
-  }
-  // get eventImage1() {
-  //   return this.ownerForm.get("eventImage1");
-  // }
-  // get eventImage2() {
-  //   return this.ownerForm.get("eventImage2");
-  // }
-  get hosts() {
-    return this.ownerForm.get("hosts");
-  }
-  
-  
-
-  get TicketName() {
-    return this.ownerForm.get("TicketName");
-  }
-  get ticketQuantity() {
-    return this.ownerForm.get("ticketQuantity");
-  }
-  get freetickbox() {
-    return this.ownerForm.get("freetickbox");
-  }
-  get TickLinks() {
-    return this.ownerForm.get("TickLinks");
-  }
-  get Mini() {
-    return this.ownerForm.get("Mini");
-  }
-  get max() {
-    return this.ownerForm.get("max");
+  changeDate(event: FocusEvent){
+    const eventTarget = event.target;
+    console.log(eventTarget);
   }
 
-  get date1() {
-    return this.ownerForm.get("date1");
+  onFileSelected(event) {
+    const file: File = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadstart = (p) => {
+      console.log(p);
+    };
+    reader.onloadend = (e) => {
+      console.log(e.target);
+      this.upLoadedFile = reader.result;
+      this.eventForm.get('imgUrl').setValue(this.upLoadedFile);
+      //console.log(this.upLoadedFile);
+    };
   }
-  get time1() {
-    return this.ownerForm.get("time1");
-  }
-  get date2() {
-    return this.ownerForm.get("date2");
-  }
-  get time2() {
-    return this.ownerForm.get("time2");
-  }
 
-
-  public errorMessages = {
-    restaname: [
-      { type: 'required', message: 'Event name is required' },
-      { type: 'maxlength', message: 'No longer than 100 characters' }
-    ],
-    venue: [
-      { type: 'required', message: 'Venue is required' },
-      { type: 'maxlength', message: 'No longer than 100 characters' }
-    ],
-    address: [
-      { type: 'required', message: 'Address field is required' },
-      { type: 'maxlength', message: 'No longer than 100 characters' }
-    ],
-    eventType: [
-      { type: 'required', message: 'Choose one' },
-      { type: 'maxlength', message: 'No longer than 100 characters' }
-    ],
-    startTime: [
-      { type: 'required', message: 'Start timeis required' },
-      { type: 'maxlength', message: 'No longer than 100 characters' }
-    ],
-    endTime: [
-      { type: 'required', message: 'The time the event will end' },
-      { type: 'maxlength', message: 'No longer than 100 characters' }
-    ],
-    eventDate: [
-      { type: 'required', message: 'Valid date' },
-      { type: 'maxlength', message: 'No longer than 10 characters' }
-    ],
-    // eventImage1: [
-    //   { type: 'required', message: 'Poster Image is required' },
-    //   { type: 'maxlength', message: 'No longer than 100 characters' }
-    // ],
-    // eventImage2: [
-    //   { type: 'required', message: 'Image field required' },
-    //   { type: 'maxlength', message: 'No longer than 100 characters' }
-    // ],
-    hosts: [
-      { type: 'required', message: 'Host name is required' },
-      { type: 'maxlength', message: 'No longer than 100 characters' }
-    ],
-    TicketName: [
-      { type: 'required', message: 'Ticket name is required' },
-      { type: 'maxlength', message: 'No longer than 100 characters' }
-    ],
-    ticketQuantity: [
-      { type: 'required', message: 'Quantity Quantity is required' },
-      { type: 'maxlength', message: 'No longer than 10 characters' }
-    ],
-    freetickbox: [
-      { type: 'required', message: 'Tick the box field is required' },
-      { type: 'maxlength', message: 'No longer than 1 characters' }
-    ],
-    TickLinks: [
-      { type: 'required', message: 'Ticket Links is required' },
-      { type: 'maxlength', message: 'No longer than 100 characters' }
-    ],
-    Mini: [
-      { type: 'required', message: 'Mini field is required' },
-      { type: 'maxlength', message: 'No longer than 100 characters' }
-    ],
-    max: [
-      { type: 'required', message: 'Max is required' },
-      { type: 'maxlength', message: 'No longer than 100 characters' }
-    ],
-    date1: [
-      { type: 'required', message: 'Select the date field is required' },
-      { type: 'maxlength', message: 'No longer than 100 characters' }
-    ],
-    time1: [
-      { type: 'required', message: 'Time is required' },
-      { type: 'maxlength', message: 'No longer than 100 characters' }
-    ],
-    date2: [
-      { type: 'required', message: 'Select the date is required' },
-      { type: 'maxlength', message: 'No longer than 100 characters' }
-    ],
-    time2: [
-      { type: 'required', message: 'Select the correct time' },
-      {
-        type: 'maxlength',
-        message: 'Not more than 100 characters'
-      }
-    ]
-  };
-
- 
-
-
-
-  addEvent() {
-    this.ownerForm = this.fb.group({
+  addEvent(){
+    this.eventForm = this.fb.group({
       eventName: ['', Validators.required],
-      venue: ['', Validators.required],
-      address: ['', Validators.required],
+      eventVenue: ['', Validators.required],
+      eventAddress: ['', Validators.required],
       eventType: ['', Validators.required],
+      date: ['', Validators.required],
       startTime: ['', Validators.required],
-      endTime	: ['', Validators.required],
-      eventDate	: ['', Validators.required],
-       eventImage1	: ['', Validators.required],
-      // eventImage2	: ['', Validators.required],
-      hosts: ['', Validators.required],
-      TicketName: ['', Validators.required],
-      ticketQuantity: ['', Validators.required],
-      freetickbox: ['', Validators.required],
-      TickLinks: ['', Validators.required],
-      Mini: ['', Validators.required],
-      max: ['', Validators.required],
-      date1: ['', Validators.required],
-      time1: ['', Validators.required],
-      date2: ['', Validators.required],
-      time2: ['', Validators.required]
-      });
-    }
+      endTime: ['', Validators.required],
+      imgUrl: ['', Validators.required],
+      description: ['', Validators.required]
+    });
+  }
 
+  async eventSubmit(){
 
-    addPic(event: any) {
-      let reader = new FileReader();
-      reader.onload = (event: any) => {
-        this.downloadurl = event.target.result;
-      }
-      reader.readAsDataURL(event.target.files[0]);
-  
-    }
-   
+    const alert = await this.alertCtrl.create({
 
+      message: `Event added successfully. Click Okay to add ticket for the event.`,
+      buttons: [
+        {
+          text: 'Okay',
+          handler: () => {
 
-    async submit() {
-      const alert = await this.alertCtrl.create({
-        message: `Event added successfulluy, please click Okay to confirm`,
-        buttons: [
-          {
-            text: 'Okay',
-            handler: () => {
-              console.log(this.ownerForm.value);
-              var user = firebase.auth().currentUser
-              this.ownerId = user.uid;
-              this.eventService.regEvent().add({
-                ownerId: this.ownerId,
-                eventName: this.ownerForm.value.eventName,
-                venue: this.ownerForm.value.venue,
-                address:this.ownerForm.value.address,
-                eventType:this.ownerForm.value.eventType,
-                startTime:this.ownerForm.value.startTime,
-                endTime:this.ownerForm.value.endTime,
-                eventDate:this.ownerForm.value.eventDate,
-                eventImage1:this.ownerForm.value.eventImage1,
-                // eventImage2:this.ownerForm.value.eventImage2,
-                hosts:this.ownerForm.value.hosts,
+            const user = firebase.auth().currentUser
+            this.eventOwnerId = user.uid
 
-                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-
-                TicketName:this.ownerForm.value.TicketName,
-                ticketQuantity:this.ownerForm.value.ticketQuantity,
-                freetickbox:this.ownerForm.value.freetickbox,
-                TickLinks:this.ownerForm.value.TickLinks,
-                Mini:this.ownerForm.value.Mini,
-                max:this.ownerForm.value.max
-
-              }).then(() => {
-                this.router.navigateByUrl('/landing');
-                this.ownerForm.reset();
-              }).catch(function (error) {
-                console.log(error)
-              });
-            },
+            firebase.firestore().collection('events').add({
+              eventOwnerId: this.eventOwnerId,
+              eventName: this.eventForm.value.eventName,
+              eventVenue: this.eventForm.value.eventVenue,
+              eventAddress: this.eventForm.value.eventAddress,
+              eventType: this.eventForm.value.eventType,
+              date: this.eventForm.value.date,
+              startTime: this.eventForm.value.startTime,
+              endTime: this.eventForm.value.endTime,
+              imgUrl: this.eventForm.value.imgUrl,
+              description: this.eventForm.value.description,
+              createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            }).then((doc) => {
+              doc.set({ eventId: doc.id }, { merge: true }).then(() => {
+                console.log('event iddddd: ', this.eventId)
+                // this.router.navigate(['/create-ticket', this.eventId]);
+                // this.eventForm.reset();
+              })
+              // this.nav.navigateRoot('/create-ticket');
+              this.router.navigate(['/create-ticket', doc.id]);
+              this.eventForm.reset();
+            }).catch(function(error){
+              console.log(error)
+            });
           },
-        ]
-      });
-      return await alert.present();
-  
-    }
+        },
+      ]
 
-    goToNext(){
-      this.router.navigateByUrl('/landing');
-    }
+    });
+    return await alert.present();
 
- 
+  }
 
 }

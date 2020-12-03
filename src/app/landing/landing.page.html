@@ -8,33 +8,22 @@
 
     <h1 style="color: #ffff;">My Events</h1>
 
-    <ion-card *ngFor="let p of events">
-      <img style="width: 100%; height: 150px;" src="{{p?.eventImage1}}">
-      <!-- <ion-fab class="del" vertical="" horizontal="end">
-        <ion-fab-button class="trash">
-          <ion-icon size="small" color="dark" name="trash-outline"></ion-icon>
-        </ion-fab-button>
-      </ion-fab> -->
-
-      <!-- <ion-fab class="fab" vertical="" horizontal="end">
-        <ion-fab-button class="trash">
-          <ion-icon size="small" color="dark" name="cloud-upload-outline"></ion-icon>
-        </ion-fab-button>
-      </ion-fab> -->
+    <ion-card *ngFor="let event of events">
+      <img style="width: 100%; height: 150px;" src="{{event?.imgUrl}}" [routerLink]="'/tabs/view-event/'+ event?.eventId">
 
       <ion-grid>
         <ion-row>
           <ion-col style="color: rgb(62, 62, 248); font-size: large;">
-            Jun <br>30
+            <!-- {{event?.eventDate.toDate() | date }} <br>{{event?.eventDate.toDate() | date: 'd'}} -->
           </ion-col>
           <ion-col style="font-size: larger;">
             <ion-button class="ion-icon-left" fill="clear" size="small" color="danger">
-              <small style="text-transform: initial;">{{ ago(p?.createdAt.toDate()) }} ago </small>
+              <small style="text-transform: initial;">{{ ago(event?.createdAt.toDate()) }} ago </small>
             </ion-button>
             <br>
-            {{p?.eventName}}
+            {{event?.eventName}}
             <br>
-            {{p?.venue}}
+            {{event?.venue}}
           </ion-col>
         </ion-row>
       </ion-grid>
