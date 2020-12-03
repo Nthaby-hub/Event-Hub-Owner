@@ -29,25 +29,25 @@
           <mat-label>Name</mat-label>
           <input matInput placeholder="Name" formControlName="name">
         </mat-form-field>
-    
+
         <mat-form-field appearance="outline">
           <mat-label>Quantity</mat-label>
-          <input matInput placeholder="Event Venue" formControlName="quantity">
+          <input matInput placeholder="Quantity" formControlName="quantity">
         </mat-form-field>
-    
-        <mat-form-field appearance="fill" >
+
+        <mat-form-field appearance="fill">
           <!-- <mat-label>Price</mat-label> -->
           <input matInput placeholder="Free ticket" formControlName="price">
         </mat-form-field>
-    
+
         <br>
-  
+
         <br>
         <ion-button float-right style="border-radius: 40px;" class="button" (click)="ticketSubmit()"
-            [disabled]="!ticketForm.valid" type="submit">
-            <div>Save</div>
-          </ion-button>
-    
+          [disabled]="!ticketForm.valid" type="submit">
+          <div>Save</div>
+        </ion-button>
+
       </form>
 
     </div>
@@ -61,25 +61,25 @@
           <mat-label>Name</mat-label>
           <input matInput placeholder="Name" formControlName="name1">
         </mat-form-field>
-    
+
         <mat-form-field appearance="outline">
           <mat-label>Quantity</mat-label>
           <input matInput placeholder="Event Venue" formControlName="quantity1">
         </mat-form-field>
-    
-        <mat-form-field appearance="outline" >
+
+        <mat-form-field appearance="outline">
           <mat-label>Price</mat-label>
           <input matInput placeholder="price" formControlName="price1">
         </mat-form-field>
-    
+
         <br>
-  
+
         <br>
         <ion-button float-right style="border-radius: 40px;" class="button" (click)="ticketSubmit1()"
-            [disabled]="!ticketForm1.valid" type="submit">
-            <div>Save</div>
-          </ion-button>
-    
+          [disabled]="!ticketForm1.valid" type="submit">
+          <div>Save</div>
+        </ion-button>
+
       </form>
 
     </div>

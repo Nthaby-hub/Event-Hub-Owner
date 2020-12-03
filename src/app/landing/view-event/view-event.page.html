@@ -18,13 +18,9 @@
     <div id="bottom-cont">
       <h4><b>Event Name: {{ events?.eventName }}</b></h4>
       <p>Event Address: {{ events?.eventAddress }}</p><br>
-      <p>Event Date: {{ events?.date }}</p>
-      <p>Event Time: {{ events?.startTime }}</p>
-      <p>Event Time: {{ events?.endTime }}</p>
-      <hr style="border: 5px solid black;">
-      <h4 style="text-align: center;"><b>Description:</b></h4>
-      <br>
-      <h4 style="text-align: center;"><b>Hosts and Sponsors: </b></h4>
+      <p>Event Date: {{ events?.date.toDate() | date }}</p>
+      <p>Event Time: {{ events?.startTime | date: 'H:mm' }}</p>
+      <p>Event Time: {{ events?.endTime | date: 'H:mm' }}</p>
     </div>
 
   </div>
