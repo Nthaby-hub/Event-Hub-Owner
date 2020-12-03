@@ -37,9 +37,10 @@ export class LandingPage implements OnInit {
     let user = firebase.auth().currentUser.uid;
     console.log('profile: ', user)
 
-    firebase.firestore().collection('events').where('ownerId', '==', user).orderBy('createdAt', 'desc').onSnapshot(res => {
+    firebase.firestore().collection('events').where('eventOwnerId', '==', user).orderBy('createdAt', 'desc').onSnapshot(res => {
       res.forEach(element => {
         this.events.push(element.data());
+        console.log('events: ', this.events)
       });
     }); 
   
