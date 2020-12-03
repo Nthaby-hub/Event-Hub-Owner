@@ -38,6 +38,9 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {OverlayModule} from '@angular/cdk/overlay';
+import {MatFormFieldModule} from '@angular/material/form-field';
+
+// import {MatFormFieldControl} from '@angular/material/form-field';
 
 const MaterialComponets = [
   A11yModule,
@@ -78,7 +81,9 @@ const MaterialComponets = [
     MatTooltipModule,
     OverlayModule,
     PortalModule,
-    ScrollingModule
+    ScrollingModule,
+    MatFormFieldModule
+    // MatFormFieldControl
 ]
 @NgModule({
   imports: [MaterialComponets],

@@ -1,4 +1,3 @@
-
 <ion-content>
 
   <div class="home">
@@ -8,35 +7,40 @@
     <h6 style="color: #ffff;">Tickets Left &nbsp;&nbsp;&nbsp; 30</h6>
 
     <h1 style="color: #ffff;">My Events</h1>
-    
-    <ion-card>
-      <img src="assets/photo.jfif">
-      <ion-fab class="del" vertical="" horizontal="end">
+
+    <ion-card *ngFor="let p of events">
+      <img style="width: 100%; height: 150px;" src="{{p?.eventImage1}}">
+      <!-- <ion-fab class="del" vertical="" horizontal="end">
         <ion-fab-button class="trash">
           <ion-icon size="small" color="dark" name="trash-outline"></ion-icon>
         </ion-fab-button>
-      </ion-fab>
+      </ion-fab> -->
 
-      <ion-fab class="fab" vertical="" horizontal="end">
+      <!-- <ion-fab class="fab" vertical="" horizontal="end">
         <ion-fab-button class="trash">
           <ion-icon size="small" color="dark" name="cloud-upload-outline"></ion-icon>
         </ion-fab-button>
-      </ion-fab>
-      
-      
+      </ion-fab> -->
+
       <ion-grid>
         <ion-row>
           <ion-col style="color: rgb(62, 62, 248); font-size: large;">
             Jun <br>30
           </ion-col>
           <ion-col style="font-size: larger;">
-            Music Festive <br>FNB Stadium
+            <ion-button class="ion-icon-left" fill="clear" size="small" color="danger">
+              <small style="text-transform: initial;">{{ ago(p?.createdAt.toDate()) }} ago </small>
+            </ion-button>
+            <br>
+            {{p?.eventName}}
+            <br>
+            {{p?.venue}}
           </ion-col>
         </ion-row>
       </ion-grid>
     </ion-card>
 
-    <ion-card>
+    <!-- <ion-card>
       <img src="assets/party.jpg">
       <ion-fab class="delet" vertical="" horizontal="end">
         <ion-fab-button class="trash">
@@ -61,13 +65,47 @@
           </ion-col>
         </ion-row>
       </ion-grid>
-    </ion-card>
+    </ion-card> -->
   </div>
 
   <ion-fab class="plus" vertical="bottom" horizontal="end">
-    <ion-fab-button class="add">
+    <ion-fab-button class="add" (click)="goToNext()">
       <ion-icon name="add-outline"></ion-icon>
+      <!-- <ion-fab-button class="add">
+      <ion-icon name="add-outline" routerLink='/create-event'></ion-icon> -->
     </ion-fab-button>
   </ion-fab>
+
+
+  <!-- newly added -->
+
+  <!-- <div class="home">
+  <h1 style="color: #ffff;">Newly Added</h1>
+
+  <ion-card  *ngFor= "let p of events">
+    <img src="{{p?.eventImage1}}" style="height: 150px;">
+    <ion-fab class="del" vertical="" horizontal="end">
+      <ion-fab-button class="trash">
+        <ion-icon size="small" color="dark" name="trash-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+    <ion-fab class="fab" vertical="" horizontal="end"> 
+      <ion-fab-button class="trash">
+        <ion-icon size="small" color="dark" name="cloud-upload-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+    <ion-grid>
+      <ion-row>
+        <ion-col style="color: rgb(62, 62, 248); font-size: large;">
+          {{p?.eventDate}}
+        </ion-col>
+        <ion-col style="font-size: larger;">
+          {{p?.eventName}} <br>{{p?.venue}} 
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</div> -->
 
 </ion-content>

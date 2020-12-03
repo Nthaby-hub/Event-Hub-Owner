@@ -105,7 +105,7 @@ export class ProfilePage implements OnInit {
     const user = firebase.auth().currentUser;
     this.eventOwnerId = user.uid;
     
-    firebase.firestore().collection('eventOwners').doc(this.eventOwnerId).collection('companyprofile').add({
+    firebase.firestore().collection('companyprofile').doc(this.eventOwnerId).set({
       eventOwnerId: this.eventOwnerId,
       // clientCode: this.profileForm.value.clientCode,
       companyName: this.profileForm.value.companyName,
@@ -115,7 +115,7 @@ export class ProfilePage implements OnInit {
       website: this.profileForm.value.website
     }).then(() => {
       loading.dismiss().then(() => {
-        this.nav.navigateRoot('/landing');
+        this.nav.navigateRoot('/tabs/landing');
         this.profileForm.reset();
       })
     },

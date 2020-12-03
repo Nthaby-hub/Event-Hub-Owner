@@ -115,6 +115,7 @@ export class SigninPage implements OnInit {
     }).then(() => {
       loading.dismiss().then(() => {
         this.nav.navigateRoot('/tabs/landing')
+
       });
     },
     async error => {

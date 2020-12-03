@@ -1,3 +1,8 @@
+ion-toolbar{
+    --background: #101045;
+    color: whitesmoke;
+}
+
 #header{
     display: flex;
     width: 100%;
@@ -23,5 +28,4 @@ hr{
 }
 #ticket{
     display: flex;
-    
 }
